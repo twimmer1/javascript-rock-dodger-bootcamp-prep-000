@@ -161,6 +161,8 @@ function moveDodger(e) {
   const key = parseInt(e.detail || e.which);
   if (key === LEFT_ARROW) {
     moveDodgerLeft()
+    e.preventDefault()
+    e.stopPropogation()
   } else if (key === RIGHT_ARROW) {
     moveDodgerRight();
   }
@@ -188,8 +190,10 @@ function moveDodgerRight() {
    * (mabye 4 pixels?). Use window.requestAnimationFrame()!
    */
   var left = positionToInteger(DODGER.style.left);
+console.log(`The DODGER right is ${left}`)
     if (left < GAME_WIDTH - 40) {
-      DODGER.style.left = `${left + 4}px`;
+      DODGER.style.left = `${left + 4}px`
+      console.log(`set dodger left to ${DODGER.style.left}`)
     }
 }
 
@@ -199,7 +203,7 @@ function moveDodgerRight() {
  */
 function positionToInteger(p) {
   return parseInt(p.split('px')[0]) || 0
-};
+}
 
 function start() {
   window.addEventListener('keydown', moveDodger)
